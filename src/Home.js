@@ -3,11 +3,19 @@ import { useState, useEffect } from "react";
 import { isDOMComponentElement } from "react-dom/cjs/react-dom-test-utils.production.min";
 import { isElementOfType } from "react-dom/test-utils";
 import BlogList from "./BlogList";
+import useFetch from "./useFetch";
 
 const Home = () => {
   //hooks
-  const [blogs, setblog] = useState(null);
-  const [isloading, setloading] = useState(true);
+  // const [blogs, setblog] = useState(null);
+  // const [isloading, setloading] = useState(true);
+  // const [error, seterror] = useState(null);
+
+  const {
+    data: blogs,
+    isloading,
+    error,
+  } = useFetch("http://localhost:8000/blogs");
 
   // { title: "My new website", body: "about website", author: "Mario", id: 1 },
   // {
@@ -25,28 +33,39 @@ const Home = () => {
   //   setblog(copyblogs);
   // };
 
-  const [name, setname] = useState("Bottle");
+  const [name, setname] = useState("Bottle"); // used for learning useState
 
   // func runs on every render
   // useEffect second argument is dependency when the func should run (when there is change in dependency here ie name)
 
-  useEffect(() => {
-    setTimeout(() => {
-      fetch("http://localhost:8000/blogs")
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
-          setblog(data);
-          setloading(false);
-        });
-    }, 500);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     fetch("http://localhost:8000/blogs")
+  //       .then((res) => {
+  //         // console.log(res);
+  //         if (!res.ok) {
+  //           throw Error("Couldn't fetch the data for that resource");
+  //         }
+  //         return res.json();
+  //       })
+  //       .then((data) => {
+  //         console.log(data);
+  //         setblog(data);
+  //         setloading(false);
+  //         seterror(null);
+  //       })
+  //       .catch((e) => {
+  //         // console.log(e.message);
+  //         seterror(e.message);
+  //         setloading(false);
+  //       });
+  //   }, 500);
+  // }, []);
 
   return (
     <div className="home">
       {isloading && <div>Loading ...</div>}
+      {error && <div> {error} </div>}
 
       {blogs && <BlogList blogs={blogs} title="All blogs" />}
       {/* <BlogList
