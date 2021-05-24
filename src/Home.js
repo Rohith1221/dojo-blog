@@ -15,7 +15,7 @@ const Home = () => {
     data: blogs,
     isloading,
     error,
-  } = useFetch("http://localhost:8000/blogs");
+  } = useFetch("http://localhost:8000/blogs"); // this url is called endpoint
 
   // { title: "My new website", body: "about website", author: "Mario", id: 1 },
   // {
@@ -35,7 +35,7 @@ const Home = () => {
 
   const [name, setname] = useState("Bottle"); // used for learning useState
 
-  // func runs on every render
+  // func runs on every render (useEffect)
   // useEffect second argument is dependency when the func should run (when there is change in dependency here ie name)
 
   // useEffect(() => {

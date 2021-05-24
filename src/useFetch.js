@@ -6,9 +6,14 @@ const useFetch = (url) => {
   const [error, seterror] = useState(null);
 
   useEffect(() => {
+    const abortCont = new AbortController();
+    {
+      /*we can assoicate with certain fetch requst , 
+  then we can use abortcontroller to cancel the fetch*/
+    }
     setTimeout(() => {
       //   fetch("http://localhost:8000/blogs")
-      fetch(url)
+      fetch(url, { signal: abortCont.signal })
         .then((res) => {
           // console.log(res);
           if (!res.ok) {
@@ -24,10 +29,19 @@ const useFetch = (url) => {
         })
         .catch((e) => {
           // console.log(e.message);
-          seterror(e.message);
-          setloading(false);
+          if (e.name === "AbortError") {
+            console.log("fetch aborted ");
+          } else {
+            seterror(e.message);
+            setloading(false);
+          }
         });
     }, 500);
+
+    return () => {
+      console.log("cleanup");
+      abortCont.abort();
+    };
   }, [url]);
 
   return { data, isloading, error };
