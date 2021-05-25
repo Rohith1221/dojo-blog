@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import useFetch from "./useFetch";
+import { useHistory } from "react-router-dom";
 
 const BlogDetails = () => {
   const { id } = useParams(); // allows to  grabs route params
@@ -10,6 +11,15 @@ const BlogDetails = () => {
     error,
   } = useFetch(`http://localhost:8000/blogs/${id}`);
 
+  const history = useHistory(); // used for redirecting to previous page
+
+  const handleClick = () => {
+    fetch("http://localhost:8000/blogs/" + blog.id, {
+      method: "DELETE",
+    }).then(() => {
+      history.push("/");
+    });
+  };
   return (
     <div className="blog-details">
       {isloading && <div>Loading ..</div>}
@@ -19,6 +29,9 @@ const BlogDetails = () => {
           <h2>{blog.title}</h2>
           <p>Writen by {blog.author}</p>
           <div>{blog.body}</div>
+          <button className="delbtn" onClick={handleClick}>
+            Delete
+          </button>
         </article>
       )}
     </div>

@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Route } from "react-router";
 import Home from "./Home";
+import { useHistory } from "react-router-dom";
+
 const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("rohith");
   const [isPending, setIsPending] = useState(false);
+  const history = useHistory(); // we can use several methods on history object to goo forward history and redirect user
 
   const handleSubmit = (e) => {
     e.preventDefault(); // doesnt refresh
@@ -21,6 +24,8 @@ const Create = () => {
     }).then(() => {
       console.log("new blog added");
       setIsPending(false);
+      // history.go(-1); // goes back to previous page in history
+      history.push("/"); // goes back to specific route
     });
   };
 

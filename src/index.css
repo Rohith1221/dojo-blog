@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 /* base styles */
 * {
   margin: 0;
@@ -21,8 +21,10 @@ body {
 .navbar h1 {
   color: #f1356d;
   text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+
   -webkit-transition: 0.3s;
-  text-shadow: 1px 3px 5px #e993ad48;
+  /* text-shadow: 1px 3px 5px #e993ad48; */
 }
 
 .navbar .links {
@@ -56,7 +58,9 @@ body {
 .blog-preview:hover {
   border-radius: 10px;
   padding: 10px;
-  background-color: rgba(204, 204, 197, 0.185);
+  /* background-color: rgba(204, 204, 197, 0.185); */
+  background-color: #f5b8ca2a;
+
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
 }
 .blog-preview h2 {
@@ -134,4 +138,19 @@ body {
 }
 .create button:hover {
   background-color: #ca2556;
+}
+
+.delbtn {
+  border: 0;
+  padding: 7px 11px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  -webkit-transition: 0.3s;
+}
+.delbtn:hover {
+  background-color: rgb(218, 218, 218);
+}
+.backhm {
+  text-decoration-style: dashed;
 }
