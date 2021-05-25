@@ -2,6 +2,8 @@ import Home from "./Home";
 import Navbar from "./Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Create from "./Create";
+import BlogList from "./BlogList";
+import BlogDetails from "./BlogDetails";
 
 function App() {
   return (
@@ -12,12 +14,14 @@ function App() {
           {/* <Home /> */}
           <Switch>
             <Route exact path="/">
-              {" "}
               {/* routing portion */}
               <Home />
             </Route>
             <Route exact path="/create">
               <Create />
+            </Route>
+            <Route exact path="/blogs/:id">
+              <BlogDetails />
             </Route>
           </Switch>
         </div>
